@@ -1,0 +1,33 @@
+.addAccount {
+    display: flex;
+
+    .homeContainer {
+        flex: 6;
+
+        .supply-account {
+            flex: 1;
+            
+
+            .select-container {
+                display: flex;
+                flex-direction: column;
+                gap: 5px; 
+                align-items: center;
+                position: relative;
+            }
+
+
+        }
+
+
+    }
+}
+
+.main-title {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: black;
+    padding: 30px 0;
+}
