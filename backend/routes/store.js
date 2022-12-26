@@ -1,15 +1,13 @@
 import express from "express";
 
-const router = express.Router();
-/*
 import { sellProduct,
          moveBrokenProToService } from "../controllers/store.js";
+const router = express.Router();
 
 
+router.patch("/sellProduct/:storeid/:proid", sellProduct);
 
-router.patch("/sellProduct/:storeid", sellProduct);
+router.post("/moveBroProToSer/:orderid/:serviceid", moveBrokenProToService);
 
-router.post("/moveBroProToSer/:storeid/:serviceid", moveBrokenProToService);
 
-*/
 export default router

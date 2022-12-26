@@ -16,4 +16,4 @@ router.get("/findFactoryProduct/:id/:proid", getFac);
 
 router.get("/allFactoryProducts/:id", getFacs);
 
-export def
+export default router

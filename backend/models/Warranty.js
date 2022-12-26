@@ -3,7 +3,9 @@ const warrantySchema = new mongoose.Schema(
     {
     Staff: {type: String, required: true},
     status: {type: String, required: true},
-    orderId: {type: mongoose.Schema.Types.ObjectId, ref:'order'}
+    desc: {type:String, require: true},
+    orderId: {type: mongoose.Schema.Types.ObjectId, ref:'order'},
+    serviceId: {type: mongoose.Schema.Types.ObjectId, ref:'user'}
    },
    {
     timestamps: true,
