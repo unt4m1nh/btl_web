@@ -37,7 +37,7 @@ const AccountTable = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Thêm tài khoản
-        <Link to="/users/new" className="link">
+        <Link to="/addaccount" className="link">
           Thêm mới
         </Link>
       </div>

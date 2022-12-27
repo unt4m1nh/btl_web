@@ -4,7 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import AccountTable from "../DataTable/AccountTable";
 
-const ListAccount = () => {
+const ListAccount = ({columns}) => {
 
     return (
         <div className="productLine">
