@@ -1,10 +1,10 @@
-import "./Product.scss";
+import "./Listaccount.scss";
 
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
-import ProductTable from "../DataTable/ProductTable";
+import AccountTable from "../DataTable/AccountTable";
 
-const Product = () => {
+const ListAccount = () => {
 
     return (
         <div className="productLine">
@@ -12,10 +12,10 @@ const Product = () => {
             <div className="homeContainer">
                 <Navbar />
                 <h2 className="product-line-heading"></h2>
-                <ProductTable />
+                <AccountTable />
             </div>
         </div>
     );
 };
 
-export default Product;
+export default ListAccount;

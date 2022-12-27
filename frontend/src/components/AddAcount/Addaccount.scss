@@ -4,30 +4,63 @@
     .homeContainer {
         flex: 6;
 
-        .supply-account {
-            flex: 1;
-            
+        .formContainer {
 
-            .select-container {
+            display: flex;
+            flex-direction: row;
+            width: auto;
+            height: auto;
+            margin: 30px 30px 30px 30px;
+            background: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .12);
+
+            .image-item {
                 display: flex;
-                flex-direction: column;
-                gap: 5px; 
-                align-items: center;
-                position: relative;
+                margin: 10px 0;
             }
 
+            .account-logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 300px;
+                height: 300px;
+            }
 
         }
-
 
     }
 }
 
-.main-title {
-    text-align: center;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: black;
-    padding: 30px 0;
+.add-image {
+    width: 520px;
+    height: auto;
+    min-height: 100%;
+    position: relative;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.add-account-heading {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.upload__image-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-type-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
 }

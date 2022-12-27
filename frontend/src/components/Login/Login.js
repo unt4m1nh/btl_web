@@ -1,6 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
-
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContex.js";
 import "./Login.scss"
 
 import Checkbox from '@mui/material/Checkbox';
@@ -38,6 +41,31 @@ const LoginButton = styled(Button)(
 );
 
 const Login = () => {
+    const [credentials, setCredentials] = useState({
+        username: undefined,
+        password: undefined,
+      });
+    
+      const { loading, error, dispatch } = useContext(AuthContext);
+    
+      const navigate = useNavigate()
+    
+      const handleChange = (e) => {
+        setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+      };
+    
+      const handleClick = async (e) => {
+        e.preventDefault();
+        dispatch({ type: "LOGIN_START" });
+        try {
+          const res = await axios.post("/auth/login", credentials);
+          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+          navigate("/bigcorp")
+        } catch (err) {
+          dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+        }
+      };
+    
     return (
         <div className="login-container">
             <div class="session">
@@ -47,14 +75,15 @@ const Login = () => {
                     <h4>Chúng tôi là <span>Big Corp</span></h4>
                     <p>Chào mừng đã trở lại ! Hãy nhập thông tin tài khoản để đăng nhập ngay nhé </p>
                     <div class="floating-label">
-                        <input placeholder="Email" type="email" name="email" id="email" autocomplete="off" />
-                        <label for="email">Email:</label>
+                        <input placeholder="Tên đăng nhập" type="text" name="username" id="username" autocomplete="off" onChange={handleChange} />
+                        <label for="username">Tên đăng nhập:</label>
                     </div>
                     <div class="floating-label">
-                        <input placeholder="Mật khẩu" type="password" name="password" id="password" autocomplete="off" />
+                        <input placeholder="Mật khẩu" type="password" name="password" id="password" autocomplete="off" onChange={handleChange} />
                         <label for="password">Mật khẩu:</label>
                     </div>
-                    <LoginButton href="/bigcorp">Đăng nhập</LoginButton>
+                    {error && <span className="error-message">{error.message}</span>}
+                    <LoginButton disabled={loading} onClick={handleClick}>Đăng nhập</LoginButton>
                     <FormGroup>
                         <FormControlLabel control={<Checkbox defaultChecked color="secondary" />} label="Ghi nhớ đăng nhập" />
                     </FormGroup>

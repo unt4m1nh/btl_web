@@ -1,6 +1,6 @@
 import User from "../models/Users.js";
-
-
+import Order from "../models/Order.js";
+import Warranty from "../models/Warranty.js";
 export const updateUser = async (req, res, next) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -30,5 +30,52 @@ export const getUser = async (req, res, next) => {
   }
 };
 
+export const getIncomeMonthly = async (req, res, next) => {
+  const date = new Date();
+  const Monthly = new Date(date.setMonth(0));
+  try {
+    const income = await Order.aggregate([
+      { $match: { createdAt: { $gte: Monthly } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+          sales: "$amount",
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: "$sales" },
+        },
+      },
+    ]);
+    res.status(200).json(income);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
+export const getWarrantyMonthly = async (req, res, next) => {
+  const date = new Date();
+  const Monthly = new Date(date.setMonth(0));
+  try {
+    const warranty = await Warranty.aggregate([
+      { $match: { createdAt: { $gte: Monthly } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    res.status(200).json(warranty);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 

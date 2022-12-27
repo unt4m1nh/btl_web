@@ -1,9 +1,20 @@
 import express from "express";
-import {  } from "../controllers/service.js";
+import { getSer,
+         getSers,
+         getWarranty,
+         getWarrantys,
+         updateWarranty } from "../controllers/service.js";
 
 const router = express.Router();
 
-//router.post("/register", register)
+router.get("/findWarranty/:id/:orderid", getWarranty);
 
+router.get("/allWarrantys/:id", getWarrantys);
+
+router.get("/findService/:id", getSer);
+
+router.get("/allServices", getSers);
+
+router.put("/updateWarranty/:id", updateWarranty);
 
 export default router

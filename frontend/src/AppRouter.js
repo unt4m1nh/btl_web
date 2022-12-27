@@ -6,6 +6,8 @@ import BigCorp from "./components/BigCorp/Bigcorp";
 import Addaccount from "./components/AddAcount/Addaccount";
 import ProductLine from "./components/ProductLine/Productline";
 import Product from "./components/Product/Product";
+import Addproduct from "./components/AddProduct/Addproduct";
+import ListAccount from "./components/ListAccount/Listaccount";
 
 
 
@@ -18,6 +20,8 @@ function AppRouter() {
                 <Route path="/addaccount" element={<Addaccount />}/>
                 <Route path="/productline" element={<ProductLine />}/>
                 <Route path="/product" element={<Product />}/>
+                <Route path="/addproduct" element={<Addproduct/>}/>
+                <Route path="/listaccount" element={<ListAccount/>}/>
             </Routes>
         </Router>
     )

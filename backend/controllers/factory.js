@@ -1,5 +1,6 @@
 import Product from "../models/Product.js";
 import Stock from "../models/Stock.js";
+import Users from "../models/Users.js";
 
 export const addProToStock = async (req, res, next) => {
     const facId = req.params.facid;
@@ -51,39 +52,45 @@ export const exportToStore = async (req, res, next) => {
     next(err);
   }
 };
-/*
-export const receiveBrokenPro = async (req, res, next) => {
-  const facId = req.params.facid;
-  const serviceId = req.params.serviceid;
-  const stockId = req.params.stockid;
-  try {
-      await Factory.updateOne({_id: facId},
-                              {$set: {'brokenPro.$[s].quantity': req.body.quantity,'brokenPro.$[s].status': 'Return to Factory' }},
-                              {arrayFilters: [{'s._id': stockId}]});
-      res.status(200).json("Factory's brokenPro has been updated.");
-  } catch (err) {
-    next(err);
-  }
-};
-*/
-export const getFac = async (req, res, next) => {
+
+export const getProduct = async (req, res, next) => {
   const facId = req.params.id;
   const proId = req.params.proid;
   try {
-    const fac = await Stock.find({director:facId, productId:proId});
+    const fac = await Stock.find({director:facId, productId:proId}).populate("productId");
     res.status(200).json(fac);
   } catch (err) {
     next(err);
   }
 };
-export const getFacs = async (req, res, next) => {
+export const getProducts = async (req, res, next) => {
   const facId = req.params.id;
   try {
-    const Facs = await Stock.find({director: facId});
+    const Facs = await Stock.find({director: facId}).populate("productId");
     res.status(200).json(Facs);
   } catch (err) {
     next(err);
   }
 };
+
+export const getFactory = async (req, res, next) => {
+  const facId = req.params.id;
+  try {
+    const fac = await Users.findById(facId);
+    res.status(200).json(fac);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getFactorys = async (req, res, next) => {
+  try {
+    const Facs = await Users.find({isFactory: true});
+    res.status(200).json(Facs);
+  } catch (err) {
+    next(err);
+  }
+};
+
 
 

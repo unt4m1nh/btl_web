@@ -1,6 +1,8 @@
 import Stock from "../models/Stock.js";
 import Order from "../models/Order.js";
 import Warranty from "../models/Warranty.js";
+import Users from "../models/Users.js";
+
 export const sellProduct = async (req, res, next) => {
     const storeId = req.params.storeid;
     const proId = req.params.proid;
@@ -38,6 +40,78 @@ export const moveBrokenProToService = async (req, res, next) => {
   })
   await newWarranty.save();
   res.status(200).json("success");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getProduct = async (req, res, next) => {
+  const stoId = req.params.id;
+  const proId = req.params.proid;
+  try {
+    const sto = await Stock.find({director:stoId, productId:proId}).populate("productId");
+    res.status(200).json(sto);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getProducts = async (req, res, next) => {
+  const stoId = req.params.id;
+  try {
+    const stos = await Stock.find({director: stoId}).populate("productId");
+    res.status(200).json(stos);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getStore = async (req, res, next) => {
+  const stoId = req.params.id;
+  try {
+    const sto = await Users.findById(stoId);
+    res.status(200).json(sto);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getStores = async (req, res, next) => {
+  try {
+    const stos = await Users.find({isStore: true});
+    res.status(200).json(stos);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getOrder = async (req, res, next) => {
+  const orderId = req.params.orderid;
+  try {
+    const sto = await Order.findById(orderId);
+    res.status(200).json(sto);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getOrders = async (req, res, next) => {
+  const stoId = req.params.id;
+  try {
+    const stos = await Order.find({storeId: stoId});
+    res.status(200).json(stos);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateOrder = async (req, res, next) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updatedOrder);
   } catch (err) {
     next(err);
   }
