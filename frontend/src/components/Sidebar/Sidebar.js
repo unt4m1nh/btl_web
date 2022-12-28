@@ -19,7 +19,7 @@ import { Button } from "@mui/material";
 
 import "./Sidebar.scss"
 
-const Sidebar = ({ current }) => {
+const Sidebar = () => {
     const { user, dispatch } = useContext(AuthContext);
     const navigate = useNavigate();
     const logoutHandler = async (e) => {
@@ -54,7 +54,7 @@ const Sidebar = ({ current }) => {
                             <span>Thêm tài khoản</span>
                         </li>
                     </Link>
-                    <Link to="/listaccount" style={{ textDecoration: "none" }}>
+                    <Link to="/users" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlineIcon className="icon" />
                             <span>Danh sách tài khoản</span>

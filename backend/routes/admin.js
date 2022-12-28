@@ -6,6 +6,8 @@ import {
   getPros,
   updatePro,
 } from "../controllers/product.js";
+import { getUsers,
+         deleteUser} from "../controllers/user.js"
 import Product from "../models/Product.js";
 import {verifyAdmin} from "../utils/verifyToken.js"
 const router = express.Router();
@@ -16,12 +18,14 @@ router.post("/createProduct", createProduct);
 //UPDATE
 router.put("/updateProduct/:id", updatePro);
 //DELETE
-router.delete("/deleteProduct/:id", deletePro);
+router.delete("/products/:id", deletePro);
+router.delete("/users/:id", deleteUser);
 //GET
 
 router.get("/findProduct/:id", getPro);
 //GET ALL
-router.get("/allProduct", getPros);
+router.get("/products", getPros);
+router.get("/users", getUsers);
 
 
 export default router;
