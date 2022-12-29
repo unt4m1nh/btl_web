@@ -32,16 +32,17 @@
   
         .right {
           flex: 2;
-          padding: 0px 20px;
-  
-          form {
+          height: 40rem;
+          .add-account-form {
             display: flex;
             flex-wrap: wrap;
+            width: 30%;
+            height: 30%;
             gap: 30px;
             justify-content: space-between;
   
             .formInput {
-              width: 40%;
+              width: 70%;
   
               label {
                 display: flex;
@@ -52,6 +53,13 @@
                   cursor: pointer;
                 }
               }
+
+              select {
+                width: 100%;
+                padding: 19px;
+                border: none;
+                border-bottom: 1px solid gray;
+              }
   
               input {
                 width: 100%;
@@ -60,17 +68,19 @@
                 border-bottom: 1px solid gray;
               }
             }
-  
-            button {
-              width: 150px;
-              padding: 10px;
-              border: none;
-              background-color: teal;
-              color: white;
-              font-weight: bold;
-              cursor: pointer;
-              margin-top: 10px;
-            }
+
+          }
+
+          .send-button {
+            width: 130px;
+            padding: 10px;
+            border-radius: 0;
+            margin-left: 30%;
+            background-color: teal;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
           }
         }
       }

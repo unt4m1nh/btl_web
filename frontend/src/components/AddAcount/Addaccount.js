@@ -5,6 +5,12 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState } from "react";
 import axios from "axios";
 
+import InputLabel from '@mui/material/InputLabel';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
@@ -58,7 +64,7 @@ const New = ({ inputs, title }) => {
             />
           </div>
           <div className="right">
-            <form>
+            <form className="add-account-form">
               <div className="formInput">
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -82,8 +88,17 @@ const New = ({ inputs, title }) => {
                   />
                 </div>
               ))}
-              <button onClick={handleClick}>Send</button>
+              <div className="formInput">
+                <label>Loại tài khoản</label>
+                <select>
+                  <option>BQL</option>
+                  <option>BQL</option>
+                  <option>BQL</option>
+                  <option>BQL</option>
+                </select>
+              </div>
             </form>
+            <button className="send-button" onClick={handleClick}>Send</button>
           </div>
         </div>
       </div>
