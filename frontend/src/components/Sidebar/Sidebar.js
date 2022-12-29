@@ -125,7 +125,7 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ ĐƠN HÀNG</p>
-                    <Link to="/neworder" style={{ textDecoration: "none" }}>
+                    <Link to="/addorder" style={{ textDecoration: "none" }}>
                     <li>
                         <PsychologyOutlinedIcon className="icon" />
                         <span>Thêm đơn hàng</span>
