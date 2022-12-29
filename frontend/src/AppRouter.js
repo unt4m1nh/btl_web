@@ -12,10 +12,13 @@ import AddOrder from "./components/AddOrder/AddOrder"
 import List from "./components/List/List.js";
 import ListStore from "./components/List/ListStore.js";
 import ListFactory from "./components/List/ListFactory.js";
-import {userColumns, proColumns, orderColums, stockColumns} from "./databaseSource.js";
-import {userInputs} from "./formSource.js";
-
-
+import {
+  userColumns,
+  proColumns,
+  orderColums,
+  stockColumns,
+} from "./databaseSource.js";
+import { productInputs, userInputs } from "./formSource.js";
 
 function AppRouter() {
     //console.log(userColumns);
