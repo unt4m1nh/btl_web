@@ -12,7 +12,7 @@ import ListFactory from "./components/List/ListFactory.js";
 import {userColumns, proColumns, orderColums, stockColumns} from "./databaseSource.js";
 import {userInputs} from "./formSource.js";
 function AppRouter() {
-    console.log(userColumns);
+    //console.log(userColumns);
     return (
         <Router>
             <Routes>

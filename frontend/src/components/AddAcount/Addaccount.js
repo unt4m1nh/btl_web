@@ -5,29 +5,66 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState } from "react";
 import axios from "axios";
 
-import InputLabel from '@mui/material/InputLabel';
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from "@mui/material/InputLabel";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
-  const [type, setType] = useState("")
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const handleChange1 = (e) => {
-    setType(e.target.value);
-    switch(type) {
-      case "BQL": setInfo((prev) => ({ ...prev, isAdmin: true,isFactory: false,isService: false, isStore: false }));break;
-      case "CSSS": setInfo((prev) => ({ ...prev, isAdmin: false,isFactory: true,isService: false, isStore: false }));break;
-      case "TTBH": setInfo((prev) => ({ ...prev, isAdmin: false,isFactory: false,isService: true, isStore: false }));break;
-      case "DLPP": setInfo((prev) => ({ ...prev, isAdmin: false,isFactory: false,isService: false, isStore: true }));break;
-      default: setInfo((prev) => ({ ...prev, isAdmin: false,isFactory: false,isService: false, isStore: false }));
+    switch (e.target.value) {
+      case "BQL":
+        setInfo((prev) => ({
+          ...prev,
+          isAdmin: true,
+          isFactory: false,
+          isService: false,
+          isStore: false,
+        }));
+        break;
+      case "CSSS":
+        setInfo((prev) => ({
+          ...prev,
+          isAdmin: false,
+          isFactory: true,
+          isService: false,
+          isStore: false,
+        }));
+        break;
+      case "TTBH":
+        setInfo((prev) => ({
+          ...prev,
+          isAdmin: false,
+          isFactory: false,
+          isService: true,
+          isStore: false,
+        }));
+        break;
+      case "DLPP":
+        setInfo((prev) => ({
+          ...prev,
+          isAdmin: false,
+          isFactory: false,
+          isService: false,
+          isStore: true,
+        }));
+        break;
+      default:
+        setInfo((prev) => ({
+          ...prev,
+          isAdmin: false,
+          isFactory: false,
+          isService: false,
+          isStore: false,
+        }));
+    }
   };
-  }
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -41,7 +78,7 @@ const New = ({ inputs, title }) => {
       );
 
       const { url } = uploadRes.data;
-      
+
       console.log(info);
       const newUser = {
         ...info,
@@ -102,6 +139,7 @@ const New = ({ inputs, title }) => {
               <div className="formInput">
                 <label>Loại tài khoản</label>
                 <select id="type" onChange={handleChange1}>
+                  <option defaultValue={"null"}></option>
                   <option value={"BQL"}>BQL</option>
                   <option value={"CSSS"}>Cơ sở sản suất</option>
                   <option value={"TTBH"}>Trung tâm bảo hành</option>
@@ -109,7 +147,9 @@ const New = ({ inputs, title }) => {
                 </select>
               </div>
             </form>
-            <button className="send-button" onClick={handleClick}>Send</button>
+            <button className="send-button" onClick={handleClick}>
+              Send
+            </button>
           </div>
         </div>
       </div>
