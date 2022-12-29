@@ -8,8 +8,7 @@ import ProductLine from "./components/ProductLine/Productline";
 import Addproduct from "./components/AddProduct/Addproduct";
 import List from "./components/List/List.js";
 import {userColumns} from "./databaseSource.js";
-
-
+import {userInputs} from "./formSource.js";
 function AppRouter() {
     console.log(userColumns);
     return (
@@ -17,7 +16,7 @@ function AppRouter() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/bigcorp" element={<BigCorp />} />
-                <Route path="/addaccount" element={<Addaccount />}/>
+                <Route path="/addaccount" element={<Addaccount inputs={userInputs} title="Add New User"/>}/>
                 <Route path="/productline" element={<ProductLine />}/>
                 <Route path="/addproduct" element={<Addproduct/>}/>
                 <Route path="/users" element={<List columns={userColumns}/>}/>

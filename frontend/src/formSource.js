@@ -6,12 +6,6 @@ export const userInputs = [
     placeholder: "Tên đăng nhập",
   },
   {
-    id: "fullname",
-    label: "Fullname",
-    type: "text",
-    placeholder: "Nguyễn Văn A",
-  },
-  {
     id: "email",
     label: "Email",
     type: "email",
@@ -19,16 +13,21 @@ export const userInputs = [
   },
   {
     id: "phone",
-    label: "Phone",
+    label: "Số điện thoại",
     type: "text",
     placeholder: "+84 234 567 89",
+  },
+  {
+    id: "address",
+    label: "Địa chỉ",
+    type: "text",
+    placeholder: "Cầu Giấy, Hà Nội",
   },
   {
     id: "password",
     label: "Password",
     type: "password",
   },
-  
 ];
 
 export const productInputs = [

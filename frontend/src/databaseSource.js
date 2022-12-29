@@ -13,11 +13,7 @@ export const userColumns = [
             );
         },
     },
-    {
-        field: "fullname",
-        headerName: "Họ và tên",
-        width: 230,
-    },
+    
     {
         field: "email",
         headerName: "Email",
@@ -26,6 +22,11 @@ export const userColumns = [
     {
         field: "phone",
         headerName: "Số điện thoại",
+        width: 230,
+    },
+    {
+        field: "address",
+        headerName: "Địa chỉ",
         width: 230,
     },
     {

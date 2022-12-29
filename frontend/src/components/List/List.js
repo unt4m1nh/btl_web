@@ -7,7 +7,7 @@ const List = ({columns}) => {
   return (
     <div className="list">
       <Sidebar/>
-      <div className="listContaine">
+      <div className="listContainer">
         <Navbar/>
         <Datatable columns={columns}/>
       </div>
