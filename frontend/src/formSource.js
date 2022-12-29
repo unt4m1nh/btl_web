@@ -32,34 +32,28 @@ export const userInputs = [
 
 export const productInputs = [
   {
-    id: 1,
-    label: "Title",
+    id: "proId",
+    label: "Mã sản phẩm",
     type: "text",
-    placeholder: "Apple Macbook Pro",
+    placeholder: "ID",
   },
   {
-    id: 2,
-    label: "Description",
+    id: "productname",
+    label: "Tên sản phẩm",
     type: "text",
-    placeholder: "Description",
+    placeholder: "Lamborghini",
   },
   {
-    id: 3,
-    label: "Category",
+    id: "priceEach",
+    label: "Giá sản phẩm",
     type: "text",
-    placeholder: "Computers",
+    placeholder: "1.000.000$",
   },
   {
-    id: 4,
-    label: "Price",
+    id: "warrantyTime",
+    label: "Thời gian bảo hành",
     type: "text",
-    placeholder: "100",
-  },
-  {
-    id: 5,
-    label: "Stock",
-    type: "text",
-    placeholder: "in stock",
+    placeholder: "1 ngày",
   },
 ];
 

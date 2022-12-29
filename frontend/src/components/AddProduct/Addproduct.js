@@ -5,11 +5,11 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState } from "react";
 import axios from "axios";
 
-import InputLabel from '@mui/material/InputLabel';
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from "@mui/material/InputLabel";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
@@ -32,12 +32,12 @@ const New = ({ inputs, title }) => {
 
       const { url } = uploadRes.data;
 
-      const newUser = {
+      const newProd = {
         ...info,
-        img: url,
+        image: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post("/admin/createProduct", newProd);
     } catch (err) {
       console.log(err);
     }
@@ -90,16 +90,19 @@ const New = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Loại tài khoản</label>
-                <select>
-                  <option>BQL</option>
-                  <option>BQL</option>
-                  <option>BQL</option>
-                  <option>BQL</option>
+                <select id="type" onChange={handleChange}>
+                  <option defaultValue={"null"}></option>
+                  <option value={"Xe 3 bánh"}>Xe 3 bánh</option>
+                  <option value={"Xe 4 bánh"}>Xe 4 bánh</option>
+                  <option value={"Xe 4 chỗ"}>Xe 4 chỗ</option>
+                  <option value={"Xe 7 chỗ"}>Xe 7 chỗ</option>
+                  <option value={"Xe mui trần"}>Xe mui trần</option>
                 </select>
               </div>
             </form>
-            <button className="send-button" onClick={handleClick}>Send</button>
+            <button className="send-button" onClick={handleClick}>
+              Send
+            </button>
           </div>
         </div>
       </div>
