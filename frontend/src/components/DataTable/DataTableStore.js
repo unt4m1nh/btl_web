@@ -1,15 +1,16 @@
-import "./Datatable.scss";
+import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
-
+import {AuthContext} from "../../context/AuthContex.js"
 const Datatable = ({columns}) => {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
-  const { data, loading, error } = useFetch(`/admin/${path}`);
+  const { data, loading, error } = useFetch(`/store/${path}/${user._id}`);
   console.log(data);
   useEffect(() => {
     setList(data);
@@ -17,7 +18,7 @@ const Datatable = ({columns}) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/admin/${path}/${id}`);
+      await axios.delete(`/store/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -47,6 +48,7 @@ const Datatable = ({columns}) => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
+        
       </div>
       <DataGrid
         className="datagrid"

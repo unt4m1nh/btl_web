@@ -97,7 +97,7 @@ export const getOrder = async (req, res, next) => {
 export const getOrders = async (req, res, next) => {
   const stoId = req.params.id;
   try {
-    const stos = await Order.find({storeId: stoId});
+    const stos = await Order.find({storeId: stoId}).populate("productId");
     res.status(200).json(stos);
   } catch (err) {
     next(err);
@@ -112,6 +112,24 @@ export const updateOrder = async (req, res, next) => {
       { new: true }
     );
     res.status(200).json(updatedOrder);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteOrder = async (req, res, next) => {
+  try {
+    await Order.findByIdAndDelete(req.params.id);
+    res.status(200).json("Order has been deleted.");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deletestoreproduct = async (req, res, next) => {
+  try {
+    const del = await Stock.findByIdAndDelete(req.params.id);
+    res.status(200).json("Deleted!");
   } catch (err) {
     next(err);
   }
