@@ -8,7 +8,9 @@ import { sellProduct,
          getOrders,
          getProduct,
          getProducts,
-         updateOrder } from "../controllers/store.js";
+         updateOrder,
+         deleteOrder,
+         deletestoreproduct } from "../controllers/store.js";
 const router = express.Router();
 
 
@@ -16,9 +18,11 @@ router.patch("/sellProduct/:storeid/:proid", sellProduct);
 
 router.post("/moveBroProToSer/:orderid/:serviceid", moveBrokenProToService);
 
+router.delete("/orders/:id",deleteOrder);
+
 router.get("/findStoreProduct/:id/:proid", getProduct);
 
-router.get("/allStoreProducts/:id", getProducts);
+router.get("/storeproducts/:id", getProducts);
 
 router.get("/findStore/:id", getStore);
 
@@ -26,8 +30,10 @@ router.get("/allStores", getStores);
 
 router.get("/findStoreOrder/:orderid", getOrder);
 
-router.get("/allStoreOrders/:storeid", getOrders);
+router.get("/orders/:id", getOrders);
 
 router.get("/updateOrder/:id", updateOrder);
+
+router.delete("/storeproducts/:id", deletestoreproduct);
 
 export default router

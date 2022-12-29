@@ -6,9 +6,10 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContex.js"
 const Navbar = () => {
-
+  const { user, dispatch } = useContext(AuthContext);
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -18,25 +19,14 @@ const Navbar = () => {
         </div>
         <div className="items">
           <div className="item">
-            <p>Xin chào, Lâm Phạm !</p>
+            <p>Xin chào, {user.username} !</p>
           </div>
           <div className="item">
             <FullscreenExitOutlinedIcon className="icon" />
           </div>
           <div className="item">
-            <NotificationsNoneOutlinedIcon className="icon" />
-            <div className="counter">1</div>
-          </div>  
-          <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
-          </div>
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
             <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src= {user.img ? user.img : "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} 
               alt=""
               className="avatar"
             />

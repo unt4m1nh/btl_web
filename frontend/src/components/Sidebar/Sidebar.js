@@ -67,7 +67,7 @@ const Sidebar = () => {
                             <span>Thêm sản phẩm</span>
                         </li>
                     </Link>
-                    <Link to="/productline" style={{ textDecoration: "none" }}>
+                    <Link to="/products" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreIcon className="icon" />
                             <span>Dòng sản phẩm</span>
@@ -118,20 +118,20 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ SẢN PHẨM </p>
-                    <Link to="/productline" style={{ textDecoration: "none" }}>
+                    <Link to="/storeproducts" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreIcon className="icon" />
                             <span>Kho hàng</span>
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ ĐƠN HÀNG</p>
-                    <Link to="/guarantee" style={{ textDecoration: "none" }}>
+                    <Link to="/neworder" style={{ textDecoration: "none" }}>
                     <li>
                         <PsychologyOutlinedIcon className="icon" />
                         <span>Thêm đơn hàng</span>
                     </li>
                     </Link>
-                    <Link to="/guarantee" style={{ textDecoration: "none" }}>
+                    <Link to="/orders" style={{ textDecoration: "none" }}>
                     <li>
                         <PsychologyOutlinedIcon className="icon" />
                         <span>Danh sách đơn hàng</span>
@@ -167,7 +167,7 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ SẢN PHẨM </p>
-                    <Link to="/productline" style={{ textDecoration: "none" }}>
+                    <Link to="/factoryproducts" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreIcon className="icon" />
                             <span>Kho hàng</span>
@@ -180,6 +180,12 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <Link to="/productline" style={{ textDecoration: "none" }}>
+                        <li>
+                            <StoreIcon className="icon" />
+                            <span>Xuất sản cho đại lý</span>
+                        </li>
+                    </Link>
+                    <Link to="/exports" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreIcon className="icon" />
                             <span>Xuất sản cho đại lý</span>

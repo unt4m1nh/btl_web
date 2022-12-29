@@ -4,7 +4,9 @@ import {addProToStock,
         getFactory,
         getFactorys,
         getProduct,
-        getProducts } from "../controllers/factory.js";
+        getProducts,
+        deleteFactoryproduct,
+        getExports, } from "../controllers/factory.js";
 
 const router = express.Router();
 
@@ -14,7 +16,13 @@ router.patch("/exportToStore/:facid/:storeid/:proid", exportToStore);
 
 router.get("/findFactoryProduct/:id/:proid", getProduct);
 
-router.get("/allFactoryProducts/:id", getProducts);
+router.get("/factoryproducts/:id", getProducts);
+
+router.get("/exports/:id", getExports);
+
+router.delete("/exports/:id", getExports);
+
+router.delete("/factoryproducts/:id", deleteFactoryproduct);
 
 router.get("/findFactory/:id", getFactory);
 

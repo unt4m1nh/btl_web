@@ -46,7 +46,7 @@ export const userColumns = [
 ];
 
 export const proColumns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "proId", headerName: "ID", width: 130 },
     {
         field: "productName",
         headerName: "Tên sản phẩm",
@@ -66,13 +66,112 @@ export const proColumns = [
         width: 230,
     },
     {
-        field: "Price",
+        field: "priceEach",
         headerName: "Giá",
+        width: 170,
+    },
+    {
+        field: "warrantyTime",
+        headerName: "TGBH",
         width: 230,
+    },
+];
+
+export const orderColums = [
+    { field: "_id", headerName: "ID", width: 100 },
+    {
+        field: "customerName",
+        headerName: "Tên khách hàng",
+        width: 180,
+    },
+    {
+        field: "phoneNumber",
+        headerName: "Số điện thoại",
+        width: 160,
+    },
+    {
+        field: "address",
+        headerName: "Địa chỉ",
+        width: 170,
+    },
+    {
+        field: 'productname',
+        headerName: 'Tên sản phẩm',
+        valueGetter: (params) => {
+           return params.row.productId.productname;
+        },
+        width: 160,
     },
     {
         field: "WarrantyTime",
-        headerName: "TGBH",
-        width: 230,
+        headerName: "Bảo hành(lần)",
+        width: 130,
+    },
+    
+];
+
+export const stockColumns = [
+    { field: "_id", headerName: "Mã kho", width: 100 },
+    {
+        field: 'productId',
+        headerName: 'ID',
+        valueGetter: (params) => {
+           return params.row.productId.proID;
+        },
+        width: 130,
+    },
+    {
+        field: 'productname',
+        headerName: 'Tên sản phẩm',
+        renderCell: (params) => {
+            return (
+                <div className="cellWithImg">
+                    <img className="cellImg" src={params.row.productId.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="avatar" />
+                    {params.row.productId.productname}
+                </div>
+            );
+        },
+        width: 160,
+    },
+    {
+        field: "quantity",
+        headerName: "Số lượng",
+        width: 160,
+    },
+    {
+        field: "status",
+        headerName: "Trạng Thái",
+        width: 170,
+    },
+    
+];
+
+export const exportColumns = [
+    { field: "_id", headerName: "Mã đơn", width: 100 },
+    {
+        field: 'productName',
+        headerName: 'Tên sản phẩm',
+        valueGetter: (params) => {
+           return params.row.productId.productname;
+        },
+        width: 130,
+    },
+    {
+        field: 'quantity',
+        headerName: 'Số lượng',
+        width: 160,
+    },
+    {
+        field: 'productName',
+        headerName: 'Đại lý',
+        valueGetter: (params) => {
+           return params.row.storeId.username;
+        },
+        width: 130,
+    },
+    {
+        field: 'creatAt',
+        headerName: 'Ngày tạo',
+        width: 160,
     },
 ];

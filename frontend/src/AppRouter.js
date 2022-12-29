@@ -7,7 +7,9 @@ import Addaccount from "./components/AddAcount/Addaccount";
 import ProductLine from "./components/ProductLine/Productline";
 import Addproduct from "./components/AddProduct/Addproduct";
 import List from "./components/List/List.js";
-import {userColumns} from "./databaseSource.js";
+import ListStore from "./components/List/ListStore.js";
+import ListFactory from "./components/List/ListFactory.js";
+import {userColumns, proColumns, orderColums, stockColumns} from "./databaseSource.js";
 import {userInputs} from "./formSource.js";
 function AppRouter() {
     console.log(userColumns);
@@ -20,6 +22,10 @@ function AppRouter() {
                 <Route path="/productline" element={<ProductLine />}/>
                 <Route path="/addproduct" element={<Addproduct/>}/>
                 <Route path="/users" element={<List columns={userColumns}/>}/>
+                <Route path="/products" element={<List columns={proColumns}/>}/>
+                <Route path="/orders" element={<ListStore columns={orderColums}/>}/>
+                <Route path="/storeproducts" element={<ListStore columns={stockColumns}/>}/>
+                <Route path="/factoryproducts" element={<ListFactory columns={stockColumns}/>}/>
             </Routes>
         </Router>
     )

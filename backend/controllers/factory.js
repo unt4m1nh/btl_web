@@ -1,7 +1,7 @@
 import Product from "../models/Product.js";
 import Stock from "../models/Stock.js";
 import Users from "../models/Users.js";
-
+import Export from "../models/Export.js";
 export const addProToStock = async (req, res, next) => {
     const facId = req.params.facid;
     const proId = req.params.proid;
@@ -36,6 +36,11 @@ export const exportToStore = async (req, res, next) => {
                              {$inc: {quantity: -req.body.quantity}});
        await Stock.updateOne({director:storeId, productId:proId},
                              {$inc: {quantity: req.body.quantity}});
+       const newExport = new Export({quantity: req.body.quantity,
+                                     productId: proId,
+                                     factoryId: facId,
+                                     storeId: storeId,});
+       await newExport.save();
     } else {
       const newStock = new Stock({
         status: 'In Store',
@@ -46,6 +51,11 @@ export const exportToStore = async (req, res, next) => {
       await Stock.updateOne({director:facId, productId:proId},
                              {$inc: {quantity: -req.body.quantity}});
       await newStock.save();
+      const newExport = new Export({quantity: req.body.quantity,
+        productId: proId,
+        storeId: storeId,
+        factoryId: facId,});
+        await newExport.save();
     }
     res.status(200).json("Store's stock has been updated.");
   } catch (err) {
@@ -87,6 +97,33 @@ export const getFactorys = async (req, res, next) => {
   try {
     const Facs = await Users.find({isFactory: true});
     res.status(200).json(Facs);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteFactoryproduct = async (req, res, next) => {
+  try {
+    const del = await Stock.findByIdAndDelete(req.params.id);
+    res.status(200).json(del);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getExports = async (req, res, next) => {
+  try {
+    const exs = await Export.find({factoryId: req.params.id}).populate(["productId", "storeId"]);
+    res.status(200).json(exs);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteExport = async (req, res, next) => {
+  try {
+    const del = await Export.findByIdAndDelete(req.params.id);
+    res.status(200).json(del);
   } catch (err) {
     next(err);
   }
