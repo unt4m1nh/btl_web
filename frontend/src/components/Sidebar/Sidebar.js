@@ -173,19 +173,13 @@ const Sidebar = () => {
                             <span>Kho hàng</span>
                         </li>
                     </Link>
-                    <Link to="/productline" style={{ textDecoration: "none" }}>
+                    <Link to="/addtostorage" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreIcon className="icon" />
                             <span>Thêm sản phẩm vào kho</span>
                         </li>
                     </Link>
                     <Link to="/addconsignment" style={{ textDecoration: "none" }}>
-                        <li>
-                            <StoreIcon className="icon" />
-                            <span>Xuất sản cho đại lý</span>
-                        </li>
-                    </Link>
-                    <Link to="/exports" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreIcon className="icon" />
                             <span>Xuất sản cho đại lý</span>

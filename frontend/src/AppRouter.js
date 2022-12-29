@@ -7,6 +7,7 @@ import Addaccount from "./components/AddAcount/Addaccount";
 import ProductLine from "./components/ProductLine/Productline";
 import Addproduct from "./components/AddProduct/Addproduct";
 import AddConsignment from "./components/AddConsignment/AddConsignment";
+import AddStorage from "./components/AddStorage/AddStorage"
 import List from "./components/List/List.js";
 import ListStore from "./components/List/ListStore.js";
 import ListFactory from "./components/List/ListFactory.js";
@@ -31,6 +32,7 @@ function AppRouter() {
                 <Route path="/storeproducts" element={<ListStore columns={stockColumns}/>}/>
                 <Route path="/factoryproducts" element={<ListFactory columns={stockColumns}/>}/>
                 <Route path="/addconsignment" element={<AddConsignment inputs={userInputs} title="Xuất lô sản phẩm" />} />
+                <Route path="/addtostorage" element={<AddStorage inputs={userInputs} title="Thêm sản phẩm vào kho" />} />
             </Routes>
         </Router>
     )
