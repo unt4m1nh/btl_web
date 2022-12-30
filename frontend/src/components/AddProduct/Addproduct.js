@@ -14,7 +14,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
-
+  const [res, setRes] = useState();
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -37,7 +37,8 @@ const New = ({ inputs, title }) => {
         image: url,
       };
 
-      await axios.post("/admin/createProduct", newProd);
+      const resp = await axios.post("/admin/createProduct", newProd);
+      setRes(resp);
     } catch (err) {
       console.log(err);
     }
@@ -90,6 +91,7 @@ const New = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
+                <label>Loại</label>
                 <select id="type" onChange={handleChange}>
                   <option defaultValue={"null"}></option>
                   <option value={"Xe 3 bánh"}>Xe 3 bánh</option>

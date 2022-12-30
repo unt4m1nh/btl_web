@@ -4,20 +4,31 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const Widget = ({ type }) => {
-  let data;
-
-  //temporary
-  const amount = 100;
-  const diff = 20;
+  const user_count = useFetch(`/admin/countUser`).data;
+  const order_count = useFetch(`/admin/countOrder`).data;
+  const monthly_count = useFetch(`/admin/countIncome`).data;
+  let total_count = 0;
+  monthly_count.forEach((monthly) => {
+    total_count += monthly.total;
+  });
+  const _count = 0;
+  let _data;
 
   switch (type) {
     case "user":
-      data = {
+      _data = {
         title: "USERS",
+        count: user_count,
         isMoney: false,
-        link: "See all users",
+        link: (
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <p>See all users</p>
+          </Link>
+        ),
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -30,10 +41,15 @@ const Widget = ({ type }) => {
       };
       break;
     case "order":
-      data = {
+      _data = {
         title: "ORDERS",
+        count: order_count,
         isMoney: false,
-        link: "View all orders",
+        link: (
+          <Link to="/product" style={{ textDecoration: "none" }}>
+            <p>See all order</p>
+          </Link>
+        ),
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -46,8 +62,9 @@ const Widget = ({ type }) => {
       };
       break;
     case "earning":
-      data = {
+      _data = {
         title: "EARNINGS",
+        count: total_count,
         isMoney: true,
         link: "View net earnings",
         icon: (
@@ -58,42 +75,36 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "balance":
-      data = {
-        title: "BALANCE",
-        isMoney: true,
-        link: "See details",
-        icon: (
-          <AccountBalanceWalletOutlinedIcon
-            className="icon"
-            style={{
-              backgroundColor: "rgba(128, 0, 128, 0.2)",
-              color: "purple",
-            }}
-          />
-        ),
-      };
-      break;
-    default:
-      break;
+    // case "balance":
+    //   data = {
+    //     title: "BALANCE",
+    //     isMoney: true,
+    //     link: "See details",
+    //     icon: (
+    //       <AccountBalanceWalletOutlinedIcon
+    //         className="icon"
+    //         style={{
+    //           backgroundColor: "rgba(128, 0, 128, 0.2)",
+    //           color: "purple",
+    //         }}
+    //       />
+    //     ),
+    //   };
+    //   break;
+    // default:
+    //   break;
   }
 
   return (
     <div className="widget">
-      <div className="left">
-        <span className="title">{data.title}</span>
+      <div className="left_widget">
+        <span className="title">{_data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {_data.count} {_data.isMoney && "vnđ"}
         </span>
-        <span className="link">{data.link}</span>
+        <span className="link">{_data.link}</span>
       </div>
-      <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
-        {data.icon}
-      </div>
+      <div className="right_widget">{_data.icon}</div>
     </div>
   );
 };

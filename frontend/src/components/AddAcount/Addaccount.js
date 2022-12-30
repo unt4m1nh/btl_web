@@ -4,16 +4,17 @@ import Navbar from "../Navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
-
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
+  const [res,setRes] = useState();
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -85,13 +86,28 @@ const New = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      const resp = await axios.post("/auth/register", newUser);
+      setRes(resp);
     } catch (err) {
       console.log(err);
     }
   };
 
   console.log(info);
+  const renderMessage = () => {
+    if (res.status == 200) {
+      return <div className="success-message">
+        <CheckCircleOutlineIcon className="success-icon" />
+        <span className="message">{res.data}</span>
+      </div>
+    }
+    if (res.status == 500) {
+      return <div className="error-message">
+        <ClearIcon className="error-icon" />
+        <span className="message">{res.data}</span>
+      </div>
+    }
+  }
   return (
     <div className="new">
       <Sidebar />
@@ -153,6 +169,11 @@ const New = ({ inputs, title }) => {
           </div>
         </div>
       </div>
+      {res &&
+        <div>
+          {renderMessage()}
+        </div>
+      }
     </div>
   );
 };

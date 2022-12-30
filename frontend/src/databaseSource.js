@@ -115,6 +115,11 @@ export const orderColums = [
     width: 160,
   },
   {
+    field: "status",
+    headerName: "Trạng Thái",
+    width: 170,
+  },
+  {
     field: "WarrantyTime",
     headerName: "Bảo hành(lần)",
     width: 130,
@@ -127,7 +132,7 @@ export const stockColumns = [
     field: "productId",
     headerName: "ID",
     valueGetter: (params) => {
-      return params.row.productId.proID;
+      return params.row.productId.proId;
     },
     width: 130,
   },
@@ -140,7 +145,7 @@ export const stockColumns = [
           <img
             className="cellImg"
             src={
-              params.row.productId.img ||
+              params.row.productId.image ||
               "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
             }
             alt="avatar"
@@ -149,7 +154,7 @@ export const stockColumns = [
         </div>
       );
     },
-    width: 160,
+    width: 200,
   },
   {
     field: "quantity",
@@ -179,7 +184,7 @@ export const exportColumns = [
     width: 160,
   },
   {
-    field: "productName",
+    field: "store",
     headerName: "Đại lý",
     valueGetter: (params) => {
       return params.row.storeId.username;
@@ -187,7 +192,36 @@ export const exportColumns = [
     width: 130,
   },
   {
-    field: "creatAt",
+    field: "createdAt",
+    headerName: "Ngày tạo",
+    width: 160,
+  },
+];
+
+export const GuaranteeColumns = [
+  { field: "_id", headerName: "Mã đơn bảo hành", width: 150 },
+  {
+    field: "orderId",
+    headerName: "Mã đơn hàng",
+    width: 130,
+  },
+  {
+    field: "staff",
+    headerName: "Nhân viên",
+    width: 160,
+  },
+  {
+    field: "desc",
+    headerName: "Mô tả lỗi",
+    width: 200,
+  },
+  {
+    field: "status",
+    headerName: "Trạng thái",
+    width: 130,
+  },
+  {
+    field: "createdAt",
     headerName: "Ngày tạo",
     width: 160,
   },

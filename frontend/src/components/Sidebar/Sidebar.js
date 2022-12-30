@@ -1,15 +1,15 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+import AddIcon from "@mui/icons-material/Add";
+import ConstructionIcon from "@mui/icons-material/Construction";
 import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
+import ImportExportIcon from "@mui/icons-material/ImportExport";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import ReorderIcon from "@mui/icons-material/Reorder";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import WarehouseIcon from "@mui/icons-material/Warehouse";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -50,51 +50,36 @@ const Sidebar = () => {
                     <p className="title">QUẢN LÍ TÀI KHOẢN</p>
                     <Link to="/addaccount" style={{ textDecoration: "none" }}>
                         <li>
-                            <PersonOutlineIcon className="icon" />
+                            <AddIcon className="icon" />
                             <span>Thêm tài khoản</span>
                         </li>
                     </Link>
                     <Link to="/users" style={{ textDecoration: "none" }}>
                         <li>
-                            <PersonOutlineIcon className="icon" />
+                            <ReorderIcon className="icon" />
                             <span>Danh sách tài khoản</span>
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ SẢN PHẨM </p>
                     <Link to="/addproduct" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <AddIcon className="icon" />
                             <span>Thêm sản phẩm</span>
                         </li>
                     </Link>
                     <Link to="/products" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <ReorderIcon className="icon" />
                             <span>Dòng sản phẩm</span>
                         </li>
                     </Link>
                     <Link to="/product" style={{ textDecoration: "none" }}>
                         <li>
                             <InsertChartIcon className="icon" />
-                            <span>Thống kê sản phẩm</span>
+                            <span>Thống kê đơn hàng</span>
                         </li>
                     </Link>
-                    <p className="title">QUẢN LÍ BẢO HÀNH</p>
-                    <Link to="/guarantee" style={{ textDecoration: "none" }}>
-                    <li>
-                        <PsychologyOutlinedIcon className="icon" />
-                        <span>Bảo hành sản phẩm</span>
-                    </li>
-                    </Link>
-                    <p className="title">DỊCH VỤ</p>
-                    <li>
-                        <PsychologyOutlinedIcon className="icon" />
-                        <span>Truy vấn</span>
-                    </li>
-                    <li>
-                        <SettingsApplicationsIcon className="icon" />
-                        <span>Cài đặt</span>
-                    </li>
+                    
                     <p className="title">NGƯỜI DÙNG</p>
                     <li>
                         <AccountCircleOutlinedIcon className="icon" />
@@ -120,30 +105,31 @@ const Sidebar = () => {
                     <p className="title">QUẢN LÍ SẢN PHẨM </p>
                     <Link to="/storeproducts" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <WarehouseIcon className="icon" />
                             <span>Kho hàng</span>
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ ĐƠN HÀNG</p>
                     <Link to="/addorder" style={{ textDecoration: "none" }}>
                     <li>
-                        <PsychologyOutlinedIcon className="icon" />
+                        <AddIcon className="icon" />
                         <span>Thêm đơn hàng</span>
                     </li>
                     </Link>
                     <Link to="/orders" style={{ textDecoration: "none" }}>
                     <li>
-                        <PsychologyOutlinedIcon className="icon" />
+                        <ReorderIcon className="icon" />
                         <span>Danh sách đơn hàng</span>
                     </li>
                     </Link>
                     <p className="title">SẢN PHẨM BẢO HÀNH</p>
-                    <Link to="/guarantee" style={{ textDecoration: "none" }}>
+                    <Link to="/addguarantee" style={{ textDecoration: "none" }}>
                     <li>
-                        <PsychologyOutlinedIcon className="icon" />
-                        <span>Danh sách sản phẩm bảo hành</span>
+                        <AddIcon className="icon" />
+                        <span>Tạo đơn bảo hành</span>
                     </li>
                     </Link>
+                    
                     <p className="title">NGƯỜI DÙNG</p>
                     <li>
                         <AccountCircleOutlinedIcon className="icon" />
@@ -169,26 +155,32 @@ const Sidebar = () => {
                     <p className="title">QUẢN LÍ SẢN PHẨM </p>
                     <Link to="/factoryproducts" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <WarehouseIcon className="icon" />
                             <span>Kho hàng</span>
                         </li>
                     </Link>
                     <Link to="/addtostorage" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <AddIcon className="icon" />
                             <span>Thêm sản phẩm vào kho</span>
                         </li>
                     </Link>
                     <Link to="/addconsignment" style={{ textDecoration: "none" }}>
                         <li>
+                            <ImportExportIcon className="icon" />
+                            <span>Xuất sản phẩm cho đại lý</span>
+                        </li>
+                    </Link>
+                    <Link to="/exports" style={{ textDecoration: "none" }}>
+                        <li>
                             <StoreIcon className="icon" />
-                            <span>Xuất sản cho đại lý</span>
+                            <span>Lô đã xuất</span>
                         </li>
                     </Link>
                     <p className="title">SẢN PHẨM LỖI</p>
-                    <Link to="/guarantee" style={{ textDecoration: "none" }}>
+                    <Link to="/guarantees" style={{ textDecoration: "none" }}>
                     <li>
-                        <PsychologyOutlinedIcon className="icon" />
+                        <ReorderIcon className="icon" />
                         <span>Danh sách sản phẩm lỗi</span>
                     </li>
                     </Link>
@@ -215,15 +207,15 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">QUẢN LÍ SẢN PHẨM </p>
-                    <Link to="/productline" style={{ textDecoration: "none" }}>
+                    <Link to="/guarantees" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <ConstructionIcon className="icon" />
                             <span>Sản phẩm cần bảo hành</span>
                         </li>
                     </Link>
-                    <Link to="/productline" style={{ textDecoration: "none" }}>
+                    <Link to="/returnproduct" style={{ textDecoration: "none" }}>
                         <li>
-                            <StoreIcon className="icon" />
+                            <KeyboardReturnIcon className="icon" />
                             <span>Hoàn trả sản phẩm lỗi </span>
                         </li>
                     </Link>

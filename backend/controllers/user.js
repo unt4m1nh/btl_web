@@ -88,3 +88,20 @@ export const getWarrantyMonthly = async (req, res, next) => {
   }
 };
 
+export const countUser = async (req, res, next) => {
+  try {
+    const count = await User.countDocuments({});
+    res.status(200).json(count);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const countOrder = async (req, res, next) => {
+  try {
+    const count = await Order.countDocuments({});
+    res.status(200).json(count);
+  } catch (err) {
+    next(err);
+  }
+};

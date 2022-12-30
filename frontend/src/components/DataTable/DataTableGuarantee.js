@@ -1,23 +1,24 @@
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
-
+import {AuthContext} from "../../context/AuthContex.js"
 const Datatable = ({columns}) => {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
-  const { data, loading, error } = useFetch(`/admin/${path}`);
-  console.log(data);
+  const { data, loading, error } = useFetch(`/service/${path}/${user._id}`);
+
   useEffect(() => {
     setList(data);
   }, [data]);
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/admin/${path}/${id}`);
+      await axios.delete(`/service/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -30,9 +31,6 @@ const Datatable = ({columns}) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
@@ -47,10 +45,6 @@ const Datatable = ({columns}) => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        {path}
-        <Link to={`/${path}/new`} className="link">
-          Add New
-        </Link>
       </div>
       <DataGrid
         className="datagrid"

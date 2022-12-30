@@ -86,3 +86,44 @@
       }
     }
   }
+
+  .success-message {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top: 0;
+    left: 70%;
+    width: 30%;
+    background-color: #5cbc64;
+    color: #fff;
+  
+    .success-icon {
+      margin-left: 2rem;
+    }
+  }
+  
+  .error-message {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top: 0;
+    left: 70%;
+    width: 30%;
+    background-color: #e11f1f;
+    color: #fff;
+  
+    .error-icon {
+      margin-left: 2rem;
+    }
+  }
+  
+  .message {
+    font-weight: 700;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  
+  }

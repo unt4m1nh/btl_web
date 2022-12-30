@@ -2,10 +2,11 @@ import Stock from "../models/Stock.js";
 import Order from "../models/Order.js";
 import Warranty from "../models/Warranty.js";
 import Users from "../models/Users.js";
-
+import Product from "../models/Product.js";
 export const sellProduct = async (req, res, next) => {
     const storeId = req.params.storeid;
     const proId = req.params.proid;
+    const pro = await Product.findById(proId);
     try {
       await Stock.updateOne({director:storeId, productId: proId},
                             {$inc: {quantity: -1}});
@@ -17,6 +18,7 @@ export const sellProduct = async (req, res, next) => {
         productId: proId,
         storeId: storeId,
         status: 'Sold',
+        amount: pro.priceEach,
       })
       await newOrder.save();
     res.status(200).json("order have been created");
@@ -33,7 +35,8 @@ export const moveBrokenProToService = async (req, res, next) => {
                         {$inc: {WarrantyTime: 1}, 
                          $set: {status: 'In Service'}});
   const newWarranty = new Warranty({
-    Staff: req.body.staff,
+    staff: req.body.staff,
+    desc: req.body.desc,
     status: 'In reparing',
     orderId: orderId,
     serviceId: serviceId,
@@ -104,6 +107,16 @@ export const getOrders = async (req, res, next) => {
   }
 };
 
+export const getOrdersInstore = async (req, res, next) => {
+  const stoId = req.params.id;
+  try {
+    const stos = await Order.find({storeId: stoId,status: 'Sold'}).populate("productId");
+    res.status(200).json(stos);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const updateOrder = async (req, res, next) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
@@ -130,6 +143,15 @@ export const deletestoreproduct = async (req, res, next) => {
   try {
     const del = await Stock.findByIdAndDelete(req.params.id);
     res.status(200).json("Deleted!");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getAllOrders = async (req, res, next) => {
+  try {
+    const stos = await Order.find().populate(["productId", "storeId"]);
+    res.status(200).json(stos);
   } catch (err) {
     next(err);
   }

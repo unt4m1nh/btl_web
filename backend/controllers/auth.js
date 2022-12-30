@@ -7,6 +7,7 @@ export const register = async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
+   
     const newUser = new User({
       ...req.body,
       password: hash,
@@ -20,7 +21,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (!user) return next(createError(404, "Không tìm thầy tên đăng nhập!"));
+    if (!user) return next(createError(404, "Không tìm thấy tên đăng nhập!"));
 
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
