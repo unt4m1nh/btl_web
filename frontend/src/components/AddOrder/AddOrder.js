@@ -2,22 +2,20 @@ import "./AddOrder.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 
-import InputLabel from '@mui/material/InputLabel';
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { AuthContext } from "../../context/AuthContex";
 import useFetch from "../../hooks/useFetch";
+
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const New = ({ inputs, title }) => {
     const [idPro, setIdPro] = useState();
     const [info, setInfo] = useState({});
     const [res, setRes] = useState();
-    
+
     const { user } = useContext(AuthContext);
     const { data, loading, error } = useFetch(`/store/storeproducts/${user._id}`);
     const handleChange = (e) => {
@@ -29,7 +27,7 @@ const New = ({ inputs, title }) => {
     };
     const handleClick = async (e) => {
         e.preventDefault();
-        
+
         try {
             const newReq = {
                 ...info,
@@ -43,6 +41,20 @@ const New = ({ inputs, title }) => {
     };
 
     console.log(info, idPro);
+    const renderMessage = () => {
+        if (res.status == 200) {
+            return <div className="success-message">
+                <CheckCircleOutlineIcon className="success-icon" />
+                <span className="message">{res.data}</span>
+            </div>
+        }
+        if (res.status == 500) {
+            return <div className="error-message">
+                <ClearIcon className="error-icon" />
+                <span className="message">{res.data}</span>
+            </div>
+        }
+    }
     return (
         <div className="new">
             <Sidebar />
@@ -57,36 +69,41 @@ const New = ({ inputs, title }) => {
                     </div>
                     <div className="right">
                         <form className="add-order-form">
-                        {inputs.map((input) => (
-                          <div className="formInput" key={input.id}>
-                         <label>{input.label}</label>
-                           <input
-                             onChange={handleChange}
-                             type={input.type}
-                             placeholder={input.placeholder}
-                             id={input.id}
-                               />
-                             </div>
+                            {inputs.map((input) => (
+                                <div className="formInput" key={input.id}>
+                                    <label>{input.label}</label>
+                                    <input
+                                        onChange={handleChange}
+                                        type={input.type}
+                                        placeholder={input.placeholder}
+                                        id={input.id}
+                                    />
+                                </div>
                             ))}
                             <div className="formInput">
                                 <label>Loại sản phẩm</label>
                                 <select id="product" onChange={handleChange1}>
-                                <option defaultValue={"null"}></option>
-                                {loading
-                                    ? "loading"
+                                    <option defaultValue={"null"}></option>
+                                    {loading
+                                        ? "loading"
                                         : data &&
-                                           data.map((product) => (
-                                           <option key={product.productId._id} value={product.productId._id}>
-                                           {product.productId.productname}
-                                           </option>
-                                           ))}
-                             </select>
+                                        data.map((product) => (
+                                            <option key={product.productId._id} value={product.productId._id}>
+                                                {product.productId.productname}
+                                            </option>
+                                        ))}
+                                </select>
                             </div>
                         </form>
                         <button className="add-order-button" onClick={handleClick}>Send</button>
                     </div>
                 </div>
             </div>
+            {res &&
+                <div>
+                    {renderMessage()}
+                </div>
+            }
         </div>
     );
 };

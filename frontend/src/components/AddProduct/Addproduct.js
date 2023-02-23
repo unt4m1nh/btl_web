@@ -11,6 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
+
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
@@ -45,6 +48,20 @@ const New = ({ inputs, title }) => {
   };
 
   console.log(info);
+  const renderMessage = () => {
+    if (res.status == 200) {
+        return <div className="success-message">
+            <CheckCircleOutlineIcon className="success-icon" />
+            <span className="message">{res.data}</span>
+        </div>
+    }
+    if (res.status == 500) {
+        return <div className="error-message">
+            <ClearIcon className="error-icon" />
+            <span className="message">{res.data}</span>
+        </div>
+    }
+}
   return (
     <div className="new">
       <Sidebar />
@@ -108,6 +125,11 @@ const New = ({ inputs, title }) => {
           </div>
         </div>
       </div>
+      {res &&
+        <div>
+          {renderMessage()}
+        </div>
+      }
     </div>
   );
 };

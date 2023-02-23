@@ -3,11 +3,14 @@ import "./AddGuarantee.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContex";
 import useFetch from "../../hooks/useFetch";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const New = ({ inputs, title }) => {
   const [idOrd, setIdOrd] = useState();
@@ -42,57 +45,76 @@ const New = ({ inputs, title }) => {
       console.log(err);
     }
   };
-    console.log(info, idOrd, idSer);
-    return (
-        <div className="new">
-            <Sidebar />
-            <div className="newContainer">
-                <Navbar />
-                <div className="consignment-top">
-                    <h1>{title}</h1>
-                    <form className="add-guarantee-form">
-                        <div className="formInput">
-                            <label>Nhân viên sửa chữa</label>
-                            <input type="text" id="staff" onChange={handleChange}/>
-                        </div>
-                        <div className="formInput">
-                            <label>Mô tả lỗi</label>
-                            <input type="text" id="desc" onChange={handleChange}/>
-                        </div>
-                        <div className="formInput">
-                            <label>Mã đơn hàng</label>
-                            <select id="order" onChange={handleChange1}>
-                            <option defaultValue={"null"}></option>
-                                {loading
-                                    ? "loading"
-                                        : data &&
-                                           data.map((ord) => (
-                                           <option key={ord._id} value={ord._id}>
-                                           {'Mã đơn:' +ord._id+', tên khách:' + ord.customerName }
-                                           </option>
-                                           ))}
-                             </select>
-                        </div>
-                        <div className="formInput">
-                        <label>Trung tâm bảo hành</label>
-                        <select id="service" onChange={handleChange2}>
-                        <option defaultValue={"null"}></option>
-                                {loading
-                                    ? "loading"
-                                        : dataSer &&
-                                           dataSer.map((ser) => (
-                                           <option key={ser._id} value={ser._id}>
-                                           {ser.username}
-                                           </option>
-                                           ))}
-                             </select>
-                        </div>
-                    </form>
-                </div>
-                <button className="export-button" onClick={handleClick}>Xuất</button>
+  console.log(info, idOrd, idSer);
+  const renderMessage = () => {
+    if (res.status == 200) {
+      return <div className="success-message">
+        <CheckCircleOutlineIcon className="success-icon" />
+        <span className="message">{res.data}</span>
+      </div>
+    }
+    if (res.status == 500) {
+      return <div className="error-message">
+        <ClearIcon className="error-icon" />
+        <span className="message">{res.data}</span>
+      </div>
+    }
+  }
+  return (
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+        <Navbar />
+        <div className="consignment-top">
+          <h1>{title}</h1>
+          <form className="add-guarantee-form">
+            <div className="formInput">
+              <label>Nhân viên sửa chữa</label>
+              <input type="text" id="staff" onChange={handleChange} />
             </div>
+            <div className="formInput">
+              <label>Mô tả lỗi</label>
+              <input type="text" id="desc" onChange={handleChange} />
+            </div>
+            <div className="formInput">
+              <label>Mã đơn hàng</label>
+              <select id="order" onChange={handleChange1}>
+                <option defaultValue={"null"}></option>
+                {loading
+                  ? "loading"
+                  : data &&
+                  data.map((ord) => (
+                    <option key={ord._id} value={ord._id}>
+                      {'Mã đơn:' + ord._id + ', tên khách:' + ord.customerName}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className="formInput">
+              <label>Trung tâm bảo hành</label>
+              <select id="service" onChange={handleChange2}>
+                <option defaultValue={"null"}></option>
+                {loading
+                  ? "loading"
+                  : dataSer &&
+                  dataSer.map((ser) => (
+                    <option key={ser._id} value={ser._id}>
+                      {ser.username}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </form>
         </div>
-    );
+        <button className="export-button" onClick={handleClick}>Xuất</button>
+      </div>
+      {res &&
+        <div>
+          {renderMessage()}
+        </div>
+      }
+    </div>
+  );
 };
 
 export default New;

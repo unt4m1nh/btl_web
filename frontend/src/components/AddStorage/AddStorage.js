@@ -3,11 +3,14 @@ import "./AddStorage.scss"
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContex";
 import useFetch from "../../hooks/useFetch";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const New = ({ inputs, title }) => {
     const [idPro, setIdPro] = useState();
@@ -30,14 +33,28 @@ const New = ({ inputs, title }) => {
                 ...info,
             };
 
-           const resp = await axios.post(`/factory/addtostorage/${user._id}/${idPro}`, newReq);
-           setRes(resp);
+            const resp = await axios.post(`/factory/addtostorage/${user._id}/${idPro}`, newReq);
+            setRes(resp);
         } catch (err) {
             console.log(err);
         }
     };
 
     console.log(info, user._id, idPro);
+    const renderMessage = () => {
+        if (res.status == 200) {
+            return <div className="success-message">
+                <CheckCircleOutlineIcon className="success-icon" />
+                <span className="message">{res.data}</span>
+            </div>
+        }
+        if (res.status == 500) {
+            return <div className="error-message">
+                <ClearIcon className="error-icon" />
+                <span className="message">{res.data}</span>
+            </div>
+        }
+    }
     return (
         <div className="new">
             <Sidebar />
@@ -49,25 +66,30 @@ const New = ({ inputs, title }) => {
                         <div className="formInput">
                             <label>Dòng sản phẩm</label>
                             <select id="product" onChange={handleChange1}>
-                            <option defaultValue={"null"}></option>
+                                <option defaultValue={"null"}></option>
                                 {loading
                                     ? "loading"
-                                        : data &&
-                                           data.map((product) => (
-                                           <option key={product._id} value={product._id}>
-                                           {product.productname}
-                                           </option>
-                                           ))}
-                             </select>
+                                    : data &&
+                                    data.map((product) => (
+                                        <option key={product._id} value={product._id}>
+                                            {product.productname}
+                                        </option>
+                                    ))}
+                            </select>
                         </div>
                         <div className="formInput">
                             <label>Số lượng</label>
-                            <input type="text" id="quantity" onChange={handleChange}/>
+                            <input type="text" id="quantity" onChange={handleChange} />
                         </div>
                         <button className="export-button" onClick={handleClick}>Thêm</button>
                     </form>
                 </div>
             </div>
+            {res &&
+                <div>
+                    {renderMessage()}
+                </div>
+            }
         </div>
     );
 };

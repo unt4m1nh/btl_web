@@ -70,7 +70,7 @@ const Sidebar = () => {
                     <Link to="/products" style={{ textDecoration: "none" }}>
                         <li>
                             <ReorderIcon className="icon" />
-                            <span>Dòng sản phẩm</span>
+                            <span>Danh sách sản phẩm</span>
                         </li>
                     </Link>
                     <Link to="/product" style={{ textDecoration: "none" }}>
@@ -176,13 +176,6 @@ const Sidebar = () => {
                             <StoreIcon className="icon" />
                             <span>Lô đã xuất</span>
                         </li>
-                    </Link>
-                    <p className="title">SẢN PHẨM LỖI</p>
-                    <Link to="/guarantees" style={{ textDecoration: "none" }}>
-                    <li>
-                        <ReorderIcon className="icon" />
-                        <span>Danh sách sản phẩm lỗi</span>
-                    </li>
                     </Link>
                     <p className="title">NGƯỜI DÙNG</p>
                     <li>
